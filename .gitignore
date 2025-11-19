@@ -1,0 +1,14 @@
+   # Example .gitignore content
+    # node_modules/
+    # *.log
+    # .env
+
+**/bin/*
+**/obj/*
+**/.vs/*
+#/.vs/IBKR_Service/CopilotIndices/17.14.1347.20289
+#/.vs/IBKR_Service/DesignTimeBuild
+#/.vs/IBKR_Service/FileContentIndex
+#/.vs/IBKR_Service/FileContentIndex/1bb67090-0a95-4721-8674-8d5ac3af3313.vsidx
+#/.vs/IBKR_Service/v17
+#/.vs/ProjectEvaluation
