@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraderBridge", "TraderBridge\TraderBridge.csproj", "{9B0F9489-C1E2-3A6C-0A13-59144AA2097F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraderBridgeTest", "TraderBridgeTest\TraderBridgeTest.csproj", "{DAA37E42-17F7-41B9-C161-3CA1F8C43B15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B0F9489-C1E2-3A6C-0A13-59144AA2097F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0F9489-C1E2-3A6C-0A13-59144AA2097F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0F9489-C1E2-3A6C-0A13-59144AA2097F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0F9489-C1E2-3A6C-0A13-59144AA2097F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA37E42-17F7-41B9-C161-3CA1F8C43B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA37E42-17F7-41B9-C161-3CA1F8C43B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA37E42-17F7-41B9-C161-3CA1F8C43B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA37E42-17F7-41B9-C161-3CA1F8C43B15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A9E9863-261E-4BE4-98BE-017FD46CADE6}
+	EndGlobalSection
+EndGlobal
