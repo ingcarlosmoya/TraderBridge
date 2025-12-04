@@ -11,6 +11,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddSingleton<ApiMessenger>();
 builder.Services.Configure<IBKRSettings>(builder.Configuration.GetSection("IBKRSettings"));
+builder.Services.Configure<Mt5Settings>(builder.Configuration.GetSection("Mt5Settings"));
 
 // Core registrations
 builder.Services.AddSingleton<IIbkrClient, IbkrClient>();

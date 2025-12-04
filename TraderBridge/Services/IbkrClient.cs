@@ -93,10 +93,8 @@ public class IbkrClient : IIbkrClient
             while (!processStarted)
             {
                 processStarted =  await RunBatCommand();
-                if (processStarted) {
-                    var response = await _apiMessenger.GetAsync(_bridgeSettings.GatewayUrl);
-                    processStarted = response.IsSuccessStatusCode;
-                }
+                var response = await _apiMessenger.GetAsync(_bridgeSettings.GatewayUrl);
+                processStarted = response.IsSuccessStatusCode;
             }
 
             Process.Start("C:\\Program Files\\Mozilla Firefox\\firefox.exe", _bridgeSettings.GatewayUrl);
@@ -132,7 +130,7 @@ public class IbkrClient : IIbkrClient
             };
 
             _logger.LogInformation("Starting client Portal Gateway....");
-            await Task.Delay(5000);
+
             _logger.LogInformation("Wait client Portal Gateway has finished....");
             process.Start();
             process.BeginOutputReadLine();
@@ -140,6 +138,7 @@ public class IbkrClient : IIbkrClient
             _logger.LogInformation("IBKR Client Portal Gateway started.");
             _logger.LogInformation("Press any key to continue...");
             processStarted = true;
+            await Task.Delay(20000);
             return processStarted;
         }
     }

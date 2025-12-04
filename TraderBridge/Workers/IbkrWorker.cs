@@ -29,26 +29,35 @@ namespace TraderBridge.Workers
 
         public async Task ExecuteSync(CancellationToken stoppingToken)
         {
-            var startClientPortalCurrentAttempt = 0;
-
-            while (!IsStartClientPortalStarted && startClientPortalCurrentAttempt < StartClientPortalMaxRetries)
+            try
             {
-                IsStartClientPortalStarted = await _ibkrClient.StartClientPortal();
-                startClientPortalCurrentAttempt++;
-            }
+                var startClientPortalCurrentAttempt = 0;
 
-            if (IsStartClientPortalStarted)
-            {
-                while (!stoppingToken.IsCancellationRequested)
+                while (!IsStartClientPortalStarted && startClientPortalCurrentAttempt < StartClientPortalMaxRetries)
                 {
-                    await _ibkrClient.Tickle();
-                    if (_ibkrClient.IsConnected)
-                        await _ibkrClient.CheckPnl();
-                    await Task.Delay(500);
-                    if (!KeepCheckingTickleAndPnl)
-                        break;
+                    IsStartClientPortalStarted = await _ibkrClient.StartClientPortal();
+                    startClientPortalCurrentAttempt++;
+                }
+
+                if (IsStartClientPortalStarted)
+                {
+                    while (!stoppingToken.IsCancellationRequested)
+                    {
+                        await _ibkrClient.Tickle();
+                        if (_ibkrClient.IsConnected)
+                            await _ibkrClient.CheckPnl();
+                        await Task.Delay(500);
+                        if (!KeepCheckingTickleAndPnl)
+                            break;
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

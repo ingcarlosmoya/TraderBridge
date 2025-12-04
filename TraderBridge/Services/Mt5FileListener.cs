@@ -8,19 +8,17 @@ using TraderBridge.Workers;
 namespace TraderBridge.Services;
 public class Mt5FileListener : IMt5Listener
 {
-    private readonly IBKRSettings _bridgeSettings;
+    private readonly Mt5Settings _mt5Settings;
     private readonly IOrderPipeline _pipeline;
     private readonly int _port;
     private readonly FileSystemWatcher _watcher;
-    private string _ordersFilePath;
     private readonly ILogger<IbkrWorker> _logger;
 
-    public Mt5FileListener(IOrderPipeline pipeline, IOptions<IBKRSettings> bridgeSettings, ILogger<IbkrWorker> logger)
+    public Mt5FileListener(IOrderPipeline pipeline, IOptions<Mt5Settings> mt5Settings, ILogger<IbkrWorker> logger)
     {
         _pipeline = pipeline;
-        _bridgeSettings = bridgeSettings.Value;
+        _mt5Settings = mt5Settings.Value;
         _logger = logger;
-        _ordersFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _bridgeSettings.OrdersFilePath);
         _watcher = new FileSystemWatcher();
     }
 
@@ -48,14 +46,14 @@ public class Mt5FileListener : IMt5Listener
     private bool CheckOrdersFileExists()
     {
 
-        if (!File.Exists(_ordersFilePath))
+        if (!File.Exists(_mt5Settings.FileOrdersPath))
         {
             _logger.LogError("El archivo no existe todavía. Asegúrate que el EA en MT5 está generando logs.");
             return false;
         }
 
-        _watcher.Path = Path.GetDirectoryName(_ordersFilePath)!;
-        _watcher.Filter = Path.GetFileName(_ordersFilePath);
+        _watcher.Path = Path.GetDirectoryName(_mt5Settings.FileOrdersPath)!;
+        _watcher.Filter = Path.GetFileName(_mt5Settings.FileOrdersPath);
         _watcher.NotifyFilter = NotifyFilters.LastWrite;
 
         _watcher.Changed += OnChanged;
@@ -71,7 +69,7 @@ public class Mt5FileListener : IMt5Listener
     {
         try
         {
-            var lines = File.ReadAllLines(_ordersFilePath);
+            var lines = File.ReadAllLines(_mt5Settings.FileOrdersPath);
             if (lines.Length == 0) return;
 
             var lastLine = lines[0]; // última línea
